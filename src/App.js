@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+// import { Button } from "reactstrap";
+import "./App.css";
+import React from "react";
+import ToDo from './components/ToDoSection/ToDo'
+import NewsList from './components/NewsSection/NewsList'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+//Adding local state to the class
+function App () {
+    return(
+      <div className="App" style={{backgroundImage: `url("https://images2.alphacoders.com/166/thumb-1920-166600.jpg")`, backgroundSize: 'cover', height: '100vh', backgroundPosition:'center'}}>
+        <div className="header">
+          <h2>Main</h2>
+          <NewsList/>
+          <ToDo />
+        </div>
+      </div>
+    );
 }
 
 export default App;

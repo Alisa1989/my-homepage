@@ -1,12 +1,15 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+// import ToDo from './Components/ToDoSection/ToDo'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <React.StrictMode >
     <App />
+ 
   </React.StrictMode>,
   document.getElementById('root')
 );

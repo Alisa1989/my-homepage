@@ -1,0 +1,5 @@
+.itemcompleted {
+    color: rgb(0, 0, 0);
+    text-decoration: line-through;
+    background-color: rgba(83, 199, 83, 0.808);
+}
