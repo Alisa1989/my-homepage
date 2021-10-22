@@ -1,14 +1,18 @@
 import React from "react";
+import {useParams} from 'react-router-dom';
 
-const ToDoItem = props => {
- 
-    return(
-        <div className= "taskContainer"
-            className={`item${props.item.completed ? "completed" : ""}` }
-            onClick={() => props.toggleItem(props.item.id, props.item.completed)}>
-                <p>{props.item.task}</p>
-            </div>
-    )
-}
+const ToDoItem = (props) => {
+    const params = useParams();
+    const collection = props.todos
+    const Item = collection.find(item => item.id === Number(params.id))
+    console.log(Item)
+
+  return (
+    <div>
+        <h2>{Item.task}</h2>
+        <button>RED</button>
+    </div>
+  );
+};
 
 export default ToDoItem;

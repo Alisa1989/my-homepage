@@ -1,7 +1,9 @@
 // import { Button } from "reactstrap";
 import "./App.css";
 import React from "react";
-import ToDo from './components/ToDoSection/ToDo'
+// import ToDo from './components/ToDoSection/ToDo'
+import {todos, ToDo} from './components/ToDoSection/ToDo'
+import ToDoItem from './components/ToDoSection/ToDoItem'
 import NewsList from './components/NewsSection/NewsList'
 import {Link, Route} from 'react-router-dom';
 
@@ -19,7 +21,10 @@ function App () {
         </div>
         <Route exact path="/"  component={NewsList}/>
         {/* <Route path="/News" component={NewsList}/> */}
-        <Route path="/ToDo" component={ToDo}/>
+        <Route exact path="/ToDo" component={ToDo}/>
+        <Route path="/ToDo/:id" component={ToDo}>
+          <ToDoItem todos={todos}/>
+        </Route>
       </div>
     );
 }
