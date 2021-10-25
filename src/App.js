@@ -6,6 +6,7 @@ import {todos, ToDo} from './components/ToDoSection/ToDo'
 import ToDoItem from './components/ToDoSection/ToDoItem'
 import NewsList from './components/NewsSection/NewsList'
 import {Link, Route} from 'react-router-dom';
+import OnBoardingForm from "./components/Login-Onboard/OnBoardingForm";
 
 //Adding local state to the class
 function App () {
@@ -17,11 +18,13 @@ function App () {
             <Link to="/">Home</Link>
             {/* <Link to="/News">News</Link> */}
             <Link to="/ToDo">ToDo</Link>
+            <Link to="/SignUp">SignUp</Link>
           </div>
         </div>
         <Route exact path="/"  component={NewsList}/>
         {/* <Route path="/News" component={NewsList}/> */}
         <Route exact path="/ToDo" component={ToDo}/>
+        <Route exact path="/SignUp" component={OnBoardingForm}/>
         <Route path="/ToDo/:id" component={ToDo}>
           <ToDoItem todos={todos}/>
         </Route>
