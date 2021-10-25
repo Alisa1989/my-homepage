@@ -10,7 +10,6 @@ const ToDoItem = (props) => {
   return (
     <div>
         <h2>{Item.task}</h2>
-        <button>RED</button>
     </div>
   );
 };
