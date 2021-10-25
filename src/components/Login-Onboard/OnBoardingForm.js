@@ -10,7 +10,7 @@ const OnBoardingForm = props => {
         console.log("handle change!", event.target.value);
         setNote({title: event.target.value})
     };
-    console.log("note:",note)
+    console.log("note:", note)
     return(
         <form>
             <label htmlFor="name">Name
