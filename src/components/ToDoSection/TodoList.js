@@ -1,15 +1,34 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 
-import ToDoItem from './ToDoItem';
+const ToDoList = (props) => {
+  return (
+    <div className="todo-container">
+      {props.todos.map((item) => {
+        return (
+          <div key={item.id} item={item}>
+            <div
+              className="taskContainer"
+              className={`item${item.completed ? "completed" : ""}`}
+            >
+              <button
+                onClick={() =>
+                  props.toggleItem(item.id, item.completed)
+                }
+              >
+                Done?
+              </button>
+              <Link to={`/ToDo/${item.id}`}>
+                <button>Details</button>
+              </Link>
 
-const ToDoList = props => {
-    return (
-        <div className= "todo-container">
-            {props.todos.map(item => {
-                return <ToDoItem key={item.id} item={item} toggleItem={props.toggleItem}/>
-            })}
-        </div>
-    );
+              <p>{item.task}</p>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
 };
 
 export default ToDoList;

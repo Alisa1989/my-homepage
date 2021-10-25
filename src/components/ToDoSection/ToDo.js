@@ -83,4 +83,4 @@ class ToDo extends React.Component {
   }
 }
 
-export default ToDo;
+export {ToDo, todos};
