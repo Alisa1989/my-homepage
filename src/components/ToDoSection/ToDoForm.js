@@ -19,8 +19,9 @@ function TodoForm(props) {
         return (
             <div className= "control-panel">
                 <form onSubmit={submitForm}>
-                    <label>
+                    <label htmlFor="text">
                     <input
+                        id="text"
                         type="text"
                         name="addTask"
                         placeholder = "enter new"

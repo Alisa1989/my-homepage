@@ -13,7 +13,7 @@ const todos = [
   {
     task: "Wash Cats",
     id: 2,
-    completed: false,
+    completed: true,
   },
   {
     task: "Clean Floors",
@@ -39,6 +39,11 @@ function ToDo() {
     console.log("item added");
   };
 
+  //clear completed
+const clearCompleted = (e) => {
+  e.preventDefault();
+  setList([list.todos.filter((item) => !item.completed)]);
+};
 
   // console.log("list", list.todos);
   //change state of item from done to !done
@@ -64,7 +69,7 @@ function ToDo() {
         <h2> Let's get some stuff done!!</h2>
       </div>
       <TodoForm addItem={addItem} />
-      <ToDoList todos={list} toggleItem={toggleItem}/>
+      <ToDoList todos={list} toggleItem={toggleItem} clearCompleted={clearCompleted}/>
     </div>
   );
 }
@@ -72,8 +77,4 @@ function ToDo() {
 export { ToDo, todos };
 
 
-//clear completed
-// const clearCompleted = (e) => {
-//   e.preventDefault();
-//   setList([list.todos.filter((item) => !item.completed)]);
-// };
+

@@ -19,6 +19,9 @@ const ToDoList = (props) => {
             </div>
           </div>
       ))};
+          <button onClick={() => props.clearCompleted()}>
+                Clear Completed
+          </button>
     </div>
   );
 }
