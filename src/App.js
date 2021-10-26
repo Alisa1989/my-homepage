@@ -11,7 +11,7 @@ import OnBoardingForm from "./components/Login-Onboard/OnBoardingForm";
 //Adding local state to the class
 function App () {
     return(
-      <div className="App" style={{backgroundImage: `url("https://images2.alphacoders.com/166/thumb-1920-166600.jpg")`, backgroundSize: 'cover', height: '100vh', backgroundPosition:'center', backgroundAttachment:'fixed', height:"100%"}}>
+      <div className="App" style={{backgroundImage: `url("https://images2.alphacoders.com/166/thumb-1920-166600.jpg")`, backgroundSize: 'cover', height: '100vh', backgroundPosition:'center', backgroundAttachment:'fixed'}}>
         <div className="header">
           <h2>Main</h2>
           <div className="nav-links">

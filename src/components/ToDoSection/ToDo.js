@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 import ToDoList from "./TodoList";
-import "./ToDo.css"
+import "./ToDo.css";
+import TodoForm from "./ToDoForm";
 
 const todos = [
   {
@@ -22,19 +23,29 @@ const todos = [
 ];
 
 //Adding local state to the class
-class ToDo extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      todos: todos,
-    };
-  }
+function ToDo() {
 
+  console.log("Todo", todos)
+  const [list, setList] = useState(todos);
+  
+  //add new item
+  const addItem = (item) => {
+    const newItem = {
+      item,
+      id: Date.now(),
+      completed: false,
+    };
+    setList([...list, newItem]);
+    console.log("item added");
+  };
+
+
+  // console.log("list", list.todos);
   //change state of item from done to !done
-  toggleItem = (itemId, isCompleted) => {
+  const toggleItem = (itemId, isCompleted) => {
     console.log(itemId, isCompleted);
-    this.setState({
-      todos: this.state.todos.map((item) => {
+    setList({
+      todos: list.todos.map((item) => {
         //go through array and look for toggled item
         if (itemId === item.id) {
           return {
@@ -46,41 +57,23 @@ class ToDo extends React.Component {
       }),
     });
   };
-
-  //add new item
-  addItem = (item) => {
-    const newItem = {
-      task: item,
-      id: Date.now(),
-      completed: false,
-    };
-    this.setState({
-      todos: [...this.state.todos, newItem],
-    });
-    console.log("item added");
-  };
-
-  //clear completed
-  clearCompleted = (e) => {
-    e.preventDefault();
-    this.setState({
-      todos: this.state.todos.filter((item) => !item.completed),
-    });
-  };
-
-  render() {
-    return(
-      <div className="ToDo">
-        <div className="header">
-          <h2> Let's get some stuff done!!</h2>
-        </div>
-        <ToDoList 
-            todos={this.state.todos}
-            toggleItem={this.toggleItem}
-        />
+  
+  return (
+    <div className="ToDo">
+      <div className="header">
+        <h2> Let's get some stuff done!!</h2>
       </div>
-    );
-  }
+      <TodoForm addItem={addItem} />
+      <ToDoList todos={list} toggleItem={toggleItem}/>
+    </div>
+  );
 }
 
-export {ToDo, todos};
+export { ToDo, todos };
+
+
+//clear completed
+// const clearCompleted = (e) => {
+//   e.preventDefault();
+//   setList([list.todos.filter((item) => !item.completed)]);
+// };

@@ -1,26 +1,34 @@
 import React, { useState } from 'react';
 
-function TodoForm() {
+function TodoForm(props) {
+    console.log("todoform",props);
     const [todo, setTodo] = useState(
-        {item: ""}
+        {task: ""}
     )
 
     //handles user input
-    handleChanges = e => {
-        setTodo({ item: e.target.value })
+    const handleChanges = e => {
+        console.log("handlechanges", e.target.value)
+        setTodo({ task: e.target.value })
     };
 
+    const submitForm = event => {
+        event.preventDefault()
+        props.addItem(todo)
+    };
         return (
             <div className= "control-panel">
-                <form>
+                <form onSubmit={submitForm}>
                     <label>
                     <input
                         type="text"
-                        name="addItem"
-                        onChange={this.handleChanges}
+                        name="addTask"
+                        placeholder = "enter new"
+                        value = {todo.task}
+                        onChange={handleChanges}
                         />
                     </label>
-                    <button>Add</button>
+                    <button type="submit">Add Item</button>
                 </form>
             </div>
         );
