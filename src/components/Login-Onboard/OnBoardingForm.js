@@ -1,11 +1,16 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import * as yup from 'yup';
 
 const OnBoardingForm = (props) => {
+  const[post, setPost] = useState([])
+
   const [userForm, setUserForm] = useState({ 
     name: "", 
     email: "" 
   });
+
+const [isButtonDisabled, setIsButtonDisabled] = useState(true)
 
 const [errors, setErrors] = useState({
   name: "", 
@@ -17,22 +22,40 @@ const formSchema = yup.object().shape({
   email: yup.string().email("must be a valid email address").required()
 })
 
+const validateChange = e => {
+  yup.reach(formSchema, e.target.name).validate(e.target.value).then(valid =>{
+    setErrors({...errors, [e.target.name]: ""})
+  }).catch(err => setErrors({...errors, [e.target.name]: err.errors[0]}));
+};
+
+console.log("error state", errors);
+
   useEffect(() => {
     formSchema.isValid(userForm).then(valid => {
-      console.log('valid?',valid)
+      console.log('valid?',valid);
+      setIsButtonDisabled(!valid)
     })
   }, [userForm])
+
   const handleChanges = (event) => {
     console.log("handle change!", event.target.value);
+    event.persist()
+    
     const newState = { ...userForm, [event.target.name]: event.target.value };
+    validateChange(event);
     setUserForm(newState);
   };
 
   const submitForm = (event) => {
     event.preventDefault();
-    //props.addUser(userForm)
-    console.log("form submitted!")
-    setUserForm({ name: "", email: "" })
+    axios.post("https://reqres.in/api/users", userForm)
+    .then(response => {
+      setPost(response.data)
+      setUserForm({ 
+        name: "", 
+        email: "" 
+      });
+    }).catch(err => console.log(err.response));
   };
 
   console.log("userForm:", userForm);
@@ -43,10 +66,12 @@ const formSchema = yup.object().shape({
         <input
           id="name"
           name="name"
+          value={userForm.name}
           type="text"
           placeholder="enter name"
           onChange={handleChanges}
         />
+        {errors.name.length > 0 ? <p className="error" style={{color:"red"}}>{errors.name}</p> : null}
       </label>
 
       <label htmlFor="email">
@@ -54,12 +79,15 @@ const formSchema = yup.object().shape({
         <input
           id="email"
           name="email"
+          value={userForm.email}
           type="email"
           placeholder="enter email"
           onChange={handleChanges}
         />
+        {errors.email.length > 0 ? <p className="error" style={{color:"red"}}>{errors.email}</p> : null}
       </label>
-      <button type="submit">Submit</button>
+      <pre>{JSON.stringify(post, null, 2)}</pre>
+      <button disabled={isButtonDisabled} type="submit">Submit</button>
     </form>
   );
 };
