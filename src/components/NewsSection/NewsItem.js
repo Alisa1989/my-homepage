@@ -3,7 +3,6 @@ import {
   Button,
   Card,
   CardImg,
-  CardImgOverlay,
   CardBody,
   CardTitle,
   CardText,
@@ -21,7 +20,7 @@ function NewsItem(props) {
           <CardTitle tag="h5">{news.source.name}</CardTitle>
           {/* <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle> */}
           <CardText>{news.title}</CardText>
-          <a href={news.url} target="_blank" > 
+          <a href={news.url} target="_blank" rel="noreferrer"> 
             <Button color="info">
               <small className="text-muted">To Article</small>
             </Button>
