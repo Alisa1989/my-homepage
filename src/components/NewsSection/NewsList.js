@@ -6,6 +6,7 @@ import { Container, Row } from "reactstrap";
 function NewsList() {
   const [news, setNews] = useState([]);
   const [country, setCountry] = useState(["us"]);
+
   useEffect(() => {
     axios
       .get(
@@ -18,10 +19,20 @@ function NewsList() {
       .catch((error) => console.log(error));
   }, [country]);
 
+const handleChanges = (e) => {
+  console.log(e.target.value);
+  setCountry(e.target.value)
+}
+
   return (
     <div className="news">
-      <button onClick={() => setCountry("us")}>USA</button>
-      <button onClick={() => setCountry("it")}>ITALY</button>
+      <select onChange={handleChanges}>
+        <option value={'us'}>USA</option>
+        <option value={'it'}>ITALY</option>
+        <option value={'fr'}>FRANCE</option>
+        <option value={'gb'}>GREAT BRITAIN</option>
+        <option value={'nl'}>NETHERLANDS</option>
+      </select>
       <Container>
         <Row>
           {news.map((news) => (
