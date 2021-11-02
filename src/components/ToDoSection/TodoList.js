@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const ToDoList = (props) => {
-  console.log("todolist", props);
+  console.log("todolist", props.todos);
 
   return (
     <div className="todo-container">

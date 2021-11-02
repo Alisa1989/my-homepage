@@ -15,6 +15,7 @@ function TodoForm(props) {
     const submitForm = event => {
         event.preventDefault()
         props.addItem(todo)
+        setTodo({task: ""})
     };
         return (
             <div className= "control-panel">

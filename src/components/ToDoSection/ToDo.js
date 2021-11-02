@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import ToDoList from "./TodoList";
 import "./ToDo.css";
 import TodoForm from "./ToDoForm";
+import { useEffect } from "react/cjs/react.development";
 
 const todos = [
   {
@@ -13,7 +14,7 @@ const todos = [
   {
     task: "Wash Cats",
     id: 2,
-    completed: true,
+    completed: false,
   },
   {
     task: "Clean Floors",
@@ -31,7 +32,7 @@ function ToDo() {
   //add new item
   const addItem = (item) => {
     const newItem = {
-      item,
+      task: item.task,
       id: Date.now(),
       completed: false,
     };
@@ -40,28 +41,22 @@ function ToDo() {
   };
 
   //clear completed
-const clearCompleted = (e) => {
-  e.preventDefault();
-  setList([list.todos.filter((item) => !item.completed)]);
+const clearCompleted = () => {
+  const filteredList = list.filter((item) => !item.completed);
+  setList(filteredList)
 };
 
-  // console.log("list", list.todos);
   //change state of item from done to !done
   const toggleItem = (itemId, isCompleted) => {
     console.log(itemId, isCompleted);
-    setList({
-      todos: list.todos.map((item) => {
-        //go through array and look for toggled item
-        if (itemId === item.id) {
-          return {
-            ...item,
-            completed: !item.completed,
-          };
-        }
-        return item;
-      }),
+    
+    const findItem = list.find((item) => {
+      return itemId === item.id 
     });
+    findItem.completed = !isCompleted
+    setList([...list]);
   };
+
   
   return (
     <div className="ToDo">
